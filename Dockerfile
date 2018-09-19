@@ -39,6 +39,8 @@ RUN git clone -b master https://github.com/goacoincore/goacoin.git . && \
     strip /goacoin/src/goacoind /goacoin/src/goacoin-cli && \
     mv /goacoin/src/goacoind /usr/local/bin/ && \
     mv /goacoin/src/goacoin-cli /usr/local/bin/ && \
+    # attach log files to
+    ln -sf /dev/stdout /root/.goacoin/debug.log && \
     # clean
     rm -rf /goacoin 
 
@@ -46,4 +48,4 @@ VOLUME ["/root/.goacoin"]
 
 EXPOSE 1947
 
-CMD exec goacoind && tail -f /root/.goacoin/debug.log
+CMD ["goacoind","-reindex"]
