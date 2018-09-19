@@ -10,7 +10,12 @@ RUN apt-get update && \
          autoconf \
          pkg-config \
          libssl-dev \ 
-         libboost-all-dev \
+         libboost-system-dev  \
+         libboost-filesystem-dev  \
+         libboost-chrono-dev   \
+         libboost-program-options-dev   \
+         libboost-test-dev   \
+         libboost-thread-dev  \
          libevent-dev \
          bsdmainutils \
          vim \
@@ -30,6 +35,7 @@ RUN add-apt-repository ppa:bitcoin/bitcoin && \
 WORKDIR /goacoin
 
 ENV GOA_VERSION v0.12.2.2
+VOLUME ["/root/.goacoin"]
 
 RUN git clone -b master https://github.com/goacoincore/goacoin.git . && \
     git checkout $GOA_VERSION && \
@@ -40,11 +46,10 @@ RUN git clone -b master https://github.com/goacoincore/goacoin.git . && \
     mv /goacoin/src/goacoind /usr/local/bin/ && \
     mv /goacoin/src/goacoin-cli /usr/local/bin/ && \
     # attach log files to
+    touch /root/.goacoin/debug.log &&\
     ln -sf /dev/stdout /root/.goacoin/debug.log && \
     # clean
     rm -rf /goacoin 
-
-VOLUME ["/root/.goacoin"]
 
 EXPOSE 1947
 
