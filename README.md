@@ -1,5 +1,5 @@
-# <h1>Goacoin - Wallet
-## Dockercontainer for Fchain Wallet
+# Goacoin - Wallet
+## Dockercontainer for Goacoin Wallet
 
 Run Container:
 >```docker run --name goacoin-masternode-01 --restart=always -d --net mn_net -p xxx.xxx.xxx.xxx:1947:1947 -p xxx.xxx.xxx.xx:1948:1948  -v /masternode/goacoin_01/.goacoin:/root/.goacoin aviator86/goa-docker```
